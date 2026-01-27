@@ -1,0 +1,42 @@
+[
+  {
+    "title": "The Ultimate Guide To Full-Body Workouts",
+    "description": "Discover exercises that target every muscle group, helping you build strength and endurance. Perfect for beginners and seasoned gym-goers alike.",
+    "published": true,
+    "author": "Alex Carter",
+    "bannerImage": "/images/Blog/hero-banner.jpg",
+    "id": "the-ultimate-guide-to-full-body-workouts",
+    "createdAt": "2026-01-24T13:33:49.733Z",
+    "updatedAt": "2026-01-25T08:12:33.276Z"
+  },
+  {
+    "title": "5 Tips For Better Cardio Sessions",
+    "description": "Improve your cardio performance with these simple yet effective techniques to maximize stamina and endurance during your workouts.",
+    "published": true,
+    "author": "Maya Lee",
+    "bannerImage": "/images/Blog/article-cardio.jpg",
+    "id": "5-tips-for-better-cardio-sessions",
+    "createdAt": "2026-01-24T13:33:57.466Z",
+    "updatedAt": "2026-01-25T08:14:06.887Z"
+  },
+  {
+    "title": "Meal Prep Basics For Gym Enthusiasts",
+    "description": "Fuel your workouts with balanced, easy-to-prepare meals. A guide on planning, prepping, and staying consistent with your nutrition goals.",
+    "published": true,
+    "author": "Jordan Smith",
+    "bannerImage": "/images/Blog/article-meal.jpg",
+    "id": "meal-prep-basics-123",
+    "createdAt": "2026-01-25T10:15:30.000Z",
+    "updatedAt": "2026-01-25T10:15:30.000Z"
+  },
+  {
+    "title": "Building Core Strength: Exercises And Benefits",
+    "description": "A strong core is essential for stability and injury prevention. Learn the best exercises to enhance your core strength and overall fitness.",
+    "published": true,
+    "author": "Emma Rodriguez",
+    "bannerImage": "/images/Blog/article-strength.jpg",
+    "id": "core-strength-456",
+    "createdAt": "2026-01-25T11:30:45.000Z",
+    "updatedAt": "2026-01-25T11:30:45.000Z"
+  }
+]
