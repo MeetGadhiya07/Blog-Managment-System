@@ -10,7 +10,7 @@ export function Input({ label, id, className = '', ...props }: InputProps) {
           htmlFor={id}
           className="text-foreground mb-3 block text-base font-medium tracking-wide"
         >
-          {label}
+          {label} <span className="text-red-500">*</span>
         </label>
       )}
       <input

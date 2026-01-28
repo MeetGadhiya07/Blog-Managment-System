@@ -208,7 +208,7 @@ const BlogCommentForm = memo(({ onSubmit }: BlogCommentFormProps) => {
       <form onSubmit={handleSubmit} className="space-y-5" noValidate>
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
           {/* Left Column - Name & Email */}
-          <div className="space-y-3.5">
+          <div className="space-y-3">
             <div>
               <Input
                 label="Name"
@@ -217,6 +217,9 @@ const BlogCommentForm = memo(({ onSubmit }: BlogCommentFormProps) => {
                 value={formData.name}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                className={
+                  touchedFields.name && errors.name ? 'ring-1 ring-red-500' : ''
+                }
                 aria-invalid={touchedFields.name && !!errors.name}
                 aria-describedby={errors.name ? 'name-error' : undefined}
                 required
@@ -242,7 +245,9 @@ const BlogCommentForm = memo(({ onSubmit }: BlogCommentFormProps) => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={
-                  touchedFields.email && errors.email ? 'border-red-500' : ''
+                  touchedFields.email && errors.email
+                    ? 'ring-1 ring-red-500'
+                    : ''
                 }
                 aria-invalid={touchedFields.email && !!errors.email}
                 aria-describedby={errors.email ? 'email-error' : undefined}
@@ -275,10 +280,10 @@ const BlogCommentForm = memo(({ onSubmit }: BlogCommentFormProps) => {
               onChange={handleChange}
               onBlur={handleBlur}
               placeholder="Write your comment..."
-              rows={5}
-              className={`focus:ring-grey bg-grey w-full resize-none rounded-lg border-none px-4 py-2.5 transition-all focus:border-transparent focus:ring-2 ${
+              rows={5.5}
+              className={`focus:ring-grey bg-grey min-h-35.5 w-full resize-none rounded-lg border-none px-4 py-2.5 transition-all focus:border-transparent focus:ring-2 ${
                 touchedFields.comment && errors.comment
-                  ? 'ring-2 ring-red-500'
+                  ? 'ring-1 ring-red-500'
                   : ''
               }`}
               aria-invalid={touchedFields.comment && !!errors.comment}
@@ -288,7 +293,7 @@ const BlogCommentForm = memo(({ onSubmit }: BlogCommentFormProps) => {
             {touchedFields.comment && errors.comment && (
               <p
                 id="comment-error"
-                className="mt-1 text-sm text-red-500"
+                className="text-sm text-red-500"
                 role="alert"
               >
                 {errors.comment}
