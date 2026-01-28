@@ -2,13 +2,19 @@
 
 import { Button } from '@/components/ui';
 import { testimonials } from '@/lib/data/testimonials';
+import SVGIcon from '@/lib/SVGIcons/Icon';
 import Image from 'next/image';
 import { memo, useCallback, useMemo, useState } from 'react';
+import type { Swiper as SwiperType } from 'swiper';
 import { Autoplay, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 const BlogTestimonial = memo(() => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
+
+  const isFirstSlide = activeIndex === 0;
+  const isLastSlide = activeIndex === testimonials.length - 1;
 
   const getPrevIndex = useCallback(
     () => (activeIndex - 1 + testimonials.length) % testimonials.length,
@@ -17,31 +23,38 @@ const BlogTestimonial = memo(() => {
 
   const getNextIndex = useCallback(() => (activeIndex + 1) % testimonials.length, [activeIndex]);
 
-  const navigationConfig = useMemo(
+  const handleSlideChange = useCallback((swiper: SwiperType) => {
+    setActiveIndex(swiper.activeIndex);
+  }, []);
+
+  const handlePrevClick = useCallback(() => {
+    swiperInstance?.slidePrev();
+  }, [swiperInstance]);
+
+  const handleNextClick = useCallback(() => {
+    swiperInstance?.slideNext();
+  }, [swiperInstance]);
+
+  const swiperConfig = useMemo(
     () => ({
-      prevEl: '.swiper-button-prev-custom',
-      nextEl: '.swiper-button-next-custom',
+      spaceBetween: 20,
+      slidesPerView: 1 as const,
+      speed: 600,
+      modules: [Navigation, Autoplay],
+      autoplay: {
+        delay: 8000,
+        disableOnInteraction: false,
+      },
+      loop: false, // Set to true if you want infinite loop
     }),
     [],
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleSlideChange = useCallback((swiper: any) => {
-    setActiveIndex(swiper.activeIndex);
-  }, []);
-
   return (
-    <>
+    <div className="w-full">
       <Swiper
-        spaceBetween={20}
-        slidesPerView={1}
-        speed={600}
-        modules={[Navigation, Autoplay]}
-        navigation={navigationConfig}
-        autoplay={{
-          delay: 8000,
-          disableOnInteraction: false,
-        }}
+        {...swiperConfig}
+        onSwiper={setSwiperInstance}
         onSlideChange={handleSlideChange}
         className="mb-8 max-w-202.25 border-b border-b-[#E5E6EA] pb-6"
       >
@@ -54,7 +67,9 @@ const BlogTestimonial = memo(() => {
                   src={testimonial.avatar}
                   alt={testimonial.name}
                   fill
+                  sizes="(max-width: 768px) 100px, 100px"
                   className="object-cover"
+                  priority={activeIndex === 0}
                 />
               </div>
               <p className="text-secondary text-base font-semibold tracking-wide italic">
@@ -64,27 +79,42 @@ const BlogTestimonial = memo(() => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="flex items-center justify-between">
-        <div className="flex flex-col items-start space-y-2">
-          <Button className="swiper-button-prev-custom text-foreground rounded-none">
-            <Image src="/images/Blog/left-icon.png" alt="Left-Arrow" width={20} height={20} />
+
+      <nav className="flex items-center justify-between" aria-label="Testimonial navigation">
+        <div className="flex flex-col items-start gap-y-2">
+          <Button
+            onClick={handlePrevClick}
+            disabled={isFirstSlide}
+            className="rounded-none disabled:cursor-not-allowed disabled:opacity-50"
+            aria-label="Previous testimonial"
+          >
+            <SVGIcon name="arrowLeft" />
             Previous
           </Button>
-          <div className="hidden text-sm text-[#262D4D] sm:block">
-            {testimonials[getPrevIndex()].title}
-          </div>
+          {!isFirstSlide && (
+            <div className="hidden text-sm text-[#262D4D] sm:block">
+              {testimonials[getPrevIndex()].title}
+            </div>
+          )}
         </div>
-        <div className="flex flex-col items-end space-y-2">
-          <Button className="swiper-button-next-custom text-foreground max-w-24 rounded-none">
-            Next{' '}
-            <Image src="/images/Blog/right-icon.png" alt="Right-Arrow" width={20} height={20} />
+
+        <div className="flex flex-col items-end gap-y-2">
+          <Button
+            onClick={handleNextClick}
+            disabled={isLastSlide}
+            className="rounded-none disabled:cursor-not-allowed disabled:opacity-50"
+            aria-label="Next testimonial"
+          >
+            Next <SVGIcon name="arrowRight" />
           </Button>
-          <div className="hidden text-sm text-[#262D4D] sm:block">
-            {testimonials[getNextIndex()].title}
-          </div>
+          {!isLastSlide && (
+            <div className="hidden text-sm text-[#262D4D] sm:block">
+              {testimonials[getNextIndex()].title}
+            </div>
+          )}
         </div>
-      </div>
-    </>
+      </nav>
+    </div>
   );
 });
 

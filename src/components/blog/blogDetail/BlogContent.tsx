@@ -16,7 +16,7 @@ const BlogContent = ({ blog }: { blog: Blog }) => {
         <ExploreMore />
       </section>
 
-      <section className="order-4 col-span-full border-t border-t-[#E5E6EA] md:order-0 md:col-span-1 md:row-start-3 md:row-end-4 md:mb-16 md:border-t-0 [&_.swiper-slide]:w-full!">
+      <section className="order-4 col-span-full border-t border-t-[#E5E6EA] md:order-0 md:col-span-1 md:row-start-3 md:row-end-4 md:mb-16 md:border-t-0 [&_.swiper-slide]:w-full! overflow-hidden">
         <BlogTestimonial />
       </section>
 
