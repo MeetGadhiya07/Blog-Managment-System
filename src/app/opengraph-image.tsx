@@ -37,6 +37,6 @@ export default function OgImage() {
         Complete Blog Management System
       </div>
     </div>,
-    { ...size },
+    { ...size }
   );
 }

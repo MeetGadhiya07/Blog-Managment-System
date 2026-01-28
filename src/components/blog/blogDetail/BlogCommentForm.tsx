@@ -66,22 +66,29 @@ const INITIAL_FORM_DATA = {
 };
 
 const BlogCommentForm = memo(({ onSubmit }: BlogCommentFormProps) => {
-  const [formData, setFormData] = useState<CreateCommentInput>(INITIAL_FORM_DATA);
+  const [formData, setFormData] =
+    useState<CreateCommentInput>(INITIAL_FORM_DATA);
   const [selectedRating, setSelectedRating] = useState<number>(5);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [touchedFields, setTouchedFields] = useState<Record<string, boolean>>({});
+  const [touchedFields, setTouchedFields] = useState<Record<string, boolean>>(
+    {}
+  );
   const [isPending, startTransition] = useTransition();
   const { addToast } = useToast();
 
   const validateField = useCallback((name: string, value: string | number) => {
     try {
-      const fieldSchema = commentSchema.shape[name as keyof typeof commentSchema.shape];
+      const fieldSchema =
+        commentSchema.shape[name as keyof typeof commentSchema.shape];
       fieldSchema.parse(value);
-      setErrors((prev) => ({ ...prev, [name]: '' }));
+      setErrors(prev => ({ ...prev, [name]: '' }));
       return true;
     } catch (error) {
       if (error instanceof z.ZodError) {
-        setErrors((prev) => ({ ...prev, [name]: error.issues[0]?.message || '' }));
+        setErrors(prev => ({
+          ...prev,
+          [name]: error.issues[0]?.message || '',
+        }));
         return false;
       }
       return false;
@@ -96,11 +103,16 @@ const BlogCommentForm = memo(({ onSubmit }: BlogCommentFormProps) => {
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: Record<string, string> = {};
-        error.issues.forEach((err) => {
+        error.issues.forEach(err => {
           if (err.path[0]) newErrors[err.path[0] as string] = err.message;
         });
         setErrors(newErrors);
-        setTouchedFields({ name: true, email: true, comment: true, rating: true });
+        setTouchedFields({
+          name: true,
+          email: true,
+          comment: true,
+          rating: true,
+        });
       }
       return false;
     }
@@ -109,31 +121,31 @@ const BlogCommentForm = memo(({ onSubmit }: BlogCommentFormProps) => {
   const handleBlur = useCallback(
     (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const { name, value } = e.target;
-      setTouchedFields((prev) => ({ ...prev, [name]: true }));
+      setTouchedFields(prev => ({ ...prev, [name]: true }));
       validateField(name, value);
     },
-    [validateField],
+    [validateField]
   );
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const { name, value } = e.target;
-      setFormData((prev) => ({ ...prev, [name]: value }));
+      setFormData(prev => ({ ...prev, [name]: value }));
 
       // Clear error on change if field was touched
-      setErrors((prev) => ({ ...prev, [name]: '' }));
+      setErrors(prev => ({ ...prev, [name]: '' }));
     },
-    [],
+    []
   );
 
   const handleRatingSelect = useCallback(
     (rating: number) => {
       setSelectedRating(rating);
-      setFormData((prev) => ({ ...prev, rating }));
-      setTouchedFields((prev) => ({ ...prev, rating: true }));
+      setFormData(prev => ({ ...prev, rating }));
+      setTouchedFields(prev => ({ ...prev, rating: true }));
       validateField('rating', rating);
     },
-    [validateField],
+    [validateField]
   );
 
   const resetForm = useCallback(() => {
@@ -162,7 +174,7 @@ const BlogCommentForm = memo(({ onSubmit }: BlogCommentFormProps) => {
         }
       });
     },
-    [formData, validateForm, onSubmit, addToast, resetForm],
+    [formData, validateForm, onSubmit, addToast, resetForm]
   );
 
   const isFormValid = useMemo(() => {
@@ -180,7 +192,7 @@ const BlogCommentForm = memo(({ onSubmit }: BlogCommentFormProps) => {
       formData.email !== '' ||
       formData.comment !== '' ||
       formData.rating !== 5,
-    [formData],
+    [formData]
   );
 
   return (
@@ -210,7 +222,11 @@ const BlogCommentForm = memo(({ onSubmit }: BlogCommentFormProps) => {
                 required
               />
               {touchedFields.name && errors.name && (
-                <p id="name-error" className="mt-1 text-sm text-red-500" role="alert">
+                <p
+                  id="name-error"
+                  className="mt-1 text-sm text-red-500"
+                  role="alert"
+                >
                   {errors.name}
                 </p>
               )}
@@ -225,13 +241,19 @@ const BlogCommentForm = memo(({ onSubmit }: BlogCommentFormProps) => {
                 value={formData.email}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className={touchedFields.email && errors.email ? 'border-red-500' : ''}
+                className={
+                  touchedFields.email && errors.email ? 'border-red-500' : ''
+                }
                 aria-invalid={touchedFields.email && !!errors.email}
                 aria-describedby={errors.email ? 'email-error' : undefined}
                 required
               />
               {touchedFields.email && errors.email && (
-                <p id="email-error" className="mt-1 text-sm text-red-500" role="alert">
+                <p
+                  id="email-error"
+                  className="mt-1 text-sm text-red-500"
+                  role="alert"
+                >
                   {errors.email}
                 </p>
               )}
@@ -255,14 +277,20 @@ const BlogCommentForm = memo(({ onSubmit }: BlogCommentFormProps) => {
               placeholder="Write your comment..."
               rows={5}
               className={`focus:ring-grey bg-grey w-full resize-none rounded-lg border-none px-4 py-2.5 transition-all focus:border-transparent focus:ring-2 ${
-                touchedFields.comment && errors.comment ? 'ring-2 ring-red-500' : ''
+                touchedFields.comment && errors.comment
+                  ? 'ring-2 ring-red-500'
+                  : ''
               }`}
               aria-invalid={touchedFields.comment && !!errors.comment}
               aria-describedby={errors.comment ? 'comment-error' : undefined}
               required
             />
             {touchedFields.comment && errors.comment && (
-              <p id="comment-error" className="mt-1 text-sm text-red-500" role="alert">
+              <p
+                id="comment-error"
+                className="mt-1 text-sm text-red-500"
+                role="alert"
+              >
                 {errors.comment}
               </p>
             )}
@@ -276,11 +304,18 @@ const BlogCommentForm = memo(({ onSubmit }: BlogCommentFormProps) => {
             role="group"
             aria-labelledby="rating-label"
           >
-            <p id="rating-label" className="text-base font-medium tracking-wide text-black">
+            <p
+              id="rating-label"
+              className="text-base font-medium tracking-wide text-black"
+            >
               Rate the usefulness of the article
             </p>
-            <div className="flex flex-wrap gap-1" role="radiogroup" aria-labelledby="rating-label">
-              {RATING_OPTIONS.map((item) => (
+            <div
+              className="flex flex-wrap gap-1"
+              role="radiogroup"
+              aria-labelledby="rating-label"
+            >
+              {RATING_OPTIONS.map(item => (
                 <button
                   key={item.rating}
                   type="button"
@@ -300,7 +335,9 @@ const BlogCommentForm = memo(({ onSubmit }: BlogCommentFormProps) => {
                   />
                   <span
                     className={`text-sm font-medium transition-all duration-300 ${
-                      selectedRating === item.rating ? 'max-w-20 opacity-100' : 'max-w-0 opacity-0'
+                      selectedRating === item.rating
+                        ? 'max-w-20 opacity-100'
+                        : 'max-w-0 opacity-0'
                     }`}
                   >
                     {item.label}

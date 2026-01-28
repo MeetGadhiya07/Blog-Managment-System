@@ -83,7 +83,9 @@ export default function BlogsPage() {
       <div className="border-border mb-4 rounded-lg border bg-white p-4 shadow-sm sm:mb-6 sm:p-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-foreground text-2xl font-bold sm:text-3xl">Blog Management</h1>
+            <h1 className="text-foreground text-2xl font-bold sm:text-3xl">
+              Blog Management
+            </h1>
             <p className="text-secondary mt-1 text-sm sm:text-base">
               Create and manage your blog posts
             </p>
@@ -135,7 +137,12 @@ export default function BlogsPage() {
       )}
 
       <div className="border-border rounded-lg border bg-white p-4 shadow-sm sm:p-6">
-        <BlogList blogs={blogs} onEdit={handleEdit} onDelete={handleDelete} showActions />
+        <BlogList
+          blogs={blogs}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+          showActions
+        />
       </div>
     </>
   );

@@ -37,6 +37,6 @@ export default function TwitterImage() {
         Complete Blog Management System
       </div>
     </div>,
-    { ...size },
+    { ...size }
   );
 }

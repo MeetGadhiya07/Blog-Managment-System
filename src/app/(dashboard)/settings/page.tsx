@@ -6,7 +6,9 @@ export default function SettingsPage() {
   return (
     <div className="mx-auto max-w-4xl">
       <div className="mb-6 sm:mb-8">
-        <h1 className="text-foreground text-2xl font-bold sm:text-3xl">Settings</h1>
+        <h1 className="text-foreground text-2xl font-bold sm:text-3xl">
+          Settings
+        </h1>
         <p className="text-secondary mt-1 text-sm sm:text-base">
           Manage your account settings and preferences
         </p>
@@ -18,11 +20,15 @@ export default function SettingsPage() {
             <div className="bg-primary/10 text-primary rounded-lg p-2">
               <User className="h-4 w-4 sm:h-5 sm:w-5" />
             </div>
-            <h2 className="text-foreground text-lg font-semibold sm:text-xl">Profile Settings</h2>
+            <h2 className="text-foreground text-lg font-semibold sm:text-xl">
+              Profile Settings
+            </h2>
           </div>
           <div className="space-y-4">
             <div>
-              <label className="text-foreground mb-2 block text-sm font-medium">Name</label>
+              <label className="text-foreground mb-2 block text-sm font-medium">
+                Name
+              </label>
               <input
                 type="text"
                 placeholder="Enter your name"
@@ -30,7 +36,9 @@ export default function SettingsPage() {
               />
             </div>
             <div>
-              <label className="text-foreground mb-2 block text-sm font-medium">Email</label>
+              <label className="text-foreground mb-2 block text-sm font-medium">
+                Email
+              </label>
               <input
                 type="email"
                 placeholder="Enter your email"
@@ -38,7 +46,9 @@ export default function SettingsPage() {
               />
             </div>
             <div>
-              <label className="text-foreground mb-2 block text-sm font-medium">Bio</label>
+              <label className="text-foreground mb-2 block text-sm font-medium">
+                Bio
+              </label>
               <textarea
                 rows={4}
                 placeholder="Tell us about yourself"
@@ -61,7 +71,9 @@ export default function SettingsPage() {
             <div className="bg-secondary/10 text-secondary rounded-lg p-2">
               <Bell className="h-4 w-4 sm:h-5 sm:w-5" />
             </div>
-            <h2 className="text-foreground text-lg font-semibold sm:text-xl">Notifications</h2>
+            <h2 className="text-foreground text-lg font-semibold sm:text-xl">
+              Notifications
+            </h2>
           </div>
           <div className="space-y-4">
             <label className="flex cursor-pointer items-center justify-between gap-4">
@@ -88,7 +100,10 @@ export default function SettingsPage() {
                   Get push notifications on your device
                 </p>
               </div>
-              <input type="checkbox" className="text-primary h-5 w-5 shrink-0 rounded" />
+              <input
+                type="checkbox"
+                className="text-primary h-5 w-5 shrink-0 rounded"
+              />
             </label>
           </div>
         </div>
@@ -98,7 +113,9 @@ export default function SettingsPage() {
             <div className="bg-error/10 text-error rounded-lg p-2">
               <Shield className="h-4 w-4 sm:h-5 sm:w-5" />
             </div>
-            <h2 className="text-foreground text-lg font-semibold sm:text-xl">Security</h2>
+            <h2 className="text-foreground text-lg font-semibold sm:text-xl">
+              Security
+            </h2>
           </div>
           <div className="space-y-4">
             <div>
@@ -112,7 +129,9 @@ export default function SettingsPage() {
               />
             </div>
             <div>
-              <label className="text-foreground mb-2 block text-sm font-medium">New Password</label>
+              <label className="text-foreground mb-2 block text-sm font-medium">
+                New Password
+              </label>
               <input
                 type="password"
                 placeholder="Enter new password"

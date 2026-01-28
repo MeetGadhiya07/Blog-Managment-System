@@ -22,7 +22,7 @@ export async function submitContact(formData: FormData) {
   }
 
   // Simulate API call
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise(resolve => setTimeout(resolve, 1000));
 
   return { success: true, message: 'Message sent successfully' };
 }

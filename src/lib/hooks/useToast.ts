@@ -16,7 +16,9 @@ export interface ToastContextType {
   clearAllToasts: () => void;
 }
 
-export const ToastContext = createContext<ToastContextType | undefined>(undefined);
+export const ToastContext = createContext<ToastContextType | undefined>(
+  undefined
+);
 
 export const useToast = () => {
   const context = useContext(ToastContext);

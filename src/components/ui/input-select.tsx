@@ -43,10 +43,12 @@ const InputSelect: React.FC<InputSelectProps> = ({
   variant = 'default',
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedValue, setSelectedValue] = useState(value || defaultValue || '');
+  const [selectedValue, setSelectedValue] = useState(
+    value || defaultValue || ''
+  );
   const selectRef = useRef<HTMLDivElement>(null);
 
-  const selectedOption = options.find((option) => option.value === selectedValue);
+  const selectedOption = options.find(option => option.value === selectedValue);
 
   useEffect(() => {
     const updateSelectedValue = () => {
@@ -60,7 +62,10 @@ const InputSelect: React.FC<InputSelectProps> = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (selectRef.current && !selectRef.current.contains(event.target as Node)) {
+      if (
+        selectRef.current &&
+        !selectRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -95,7 +100,7 @@ const InputSelect: React.FC<InputSelectProps> = ({
       : 'border-grey400 bg-white hover:border-primaryHover',
     disabled && 'cursor-not-allowed opacity-50 hover:border-gray-300',
     error && 'border-statusError focus:ring-statusError',
-    isOpen && 'border-primary ring-2 ring-primary ring-offset-2',
+    isOpen && 'border-primary ring-2 ring-primary ring-offset-2'
   );
 
   return (
@@ -106,7 +111,7 @@ const InputSelect: React.FC<InputSelectProps> = ({
           className={cn(
             'mb-2 block text-sm font-medium text-gray-700',
             required && "after:text-statusError after:ml-1 after:content-['*']",
-            disabled && 'text-gray-400',
+            disabled && 'text-gray-400'
           )}
         >
           {label}
@@ -124,7 +129,7 @@ const InputSelect: React.FC<InputSelectProps> = ({
           aria-controls={`${id}-listbox`}
           aria-label={label || placeholder}
           tabIndex={disabled ? -1 : 0}
-          onKeyDown={(e) => {
+          onKeyDown={e => {
             if (disabled) return;
 
             if (e.key === 'Enter' || e.key === ' ') {
@@ -141,10 +146,20 @@ const InputSelect: React.FC<InputSelectProps> = ({
           }}
         >
           <div className="flex items-center justify-between">
-            <span className={cn('block truncate', !selectedOption && 'text-gray-500')}>
+            <span
+              className={cn(
+                'block truncate',
+                !selectedOption && 'text-gray-500'
+              )}
+            >
               {selectedOption ? selectedOption.label : placeholder}
             </span>
-            <div className={cn('transition-transform duration-200', isOpen && 'rotate-180')}>
+            <div
+              className={cn(
+                'transition-transform duration-200',
+                isOpen && 'rotate-180'
+              )}
+            >
               <svg
                 className={cn(iconSizeClasses[size], 'text-gray-400')}
                 fill="none"
@@ -171,15 +186,16 @@ const InputSelect: React.FC<InputSelectProps> = ({
               role="listbox"
               aria-label={`${label || placeholder} options`}
             >
-              {options.map((option) => (
+              {options.map(option => (
                 <li
                   key={option.value}
                   className={cn(
                     'cursor-pointer px-3 py-2 text-sm transition-colors duration-150',
                     'hover:bg-primary/10 hover:text-primaryHover',
-                    option.value === selectedValue && 'bg-primary/20 text-primary font-medium',
+                    option.value === selectedValue &&
+                      'bg-primary/20 text-primary font-medium',
                     option.disabled &&
-                      'cursor-not-allowed opacity-50 hover:bg-transparent hover:text-gray-500',
+                      'cursor-not-allowed opacity-50 hover:bg-transparent hover:text-gray-500'
                   )}
                   onClick={() => !option.disabled && handleSelect(option.value)}
                   aria-roledescription="option"

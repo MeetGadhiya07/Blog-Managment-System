@@ -42,12 +42,12 @@ export const getAll = async (): Promise<Blog[]> => {
 
 export const getBySlug = async (slug: string): Promise<Blog | null> => {
   const blogs = await readData();
-  return blogs.find((blog) => blog.id === slug) || null;
+  return blogs.find(blog => blog.id === slug) || null;
 };
 
 export const getById = async (id: string): Promise<Blog | null> => {
   const blogs = await readData();
-  return blogs.find((blog) => blog.id === id) || null;
+  return blogs.find(blog => blog.id === id) || null;
 };
 
 export const create = async (input: CreateBlogInput): Promise<Blog> => {
@@ -65,7 +65,7 @@ export const create = async (input: CreateBlogInput): Promise<Blog> => {
 
 export const update = async (input: UpdateBlogInput): Promise<Blog | null> => {
   const blogs = await readData();
-  const index = blogs.findIndex((blog) => blog.id === input.id);
+  const index = blogs.findIndex(blog => blog.id === input.id);
   if (index === -1) return null;
 
   blogs[index] = {
@@ -79,7 +79,7 @@ export const update = async (input: UpdateBlogInput): Promise<Blog | null> => {
 
 export const deleteBlog = async (id: string): Promise<boolean> => {
   const blogs = await readData();
-  const filtered = blogs.filter((blog) => blog.id !== id);
+  const filtered = blogs.filter(blog => blog.id !== id);
   if (filtered.length === blogs.length) return false;
   await writeData(filtered);
   return true;

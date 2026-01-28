@@ -12,8 +12,16 @@ export const updateBlogSchema = blogSchema.partial().extend({
 
 export const commentSchema = z
   .object({
-    name: z.string().min(2, 'Name must be at least 2 characters').optional().or(z.literal('')),
-    email: z.string().email('Please enter a valid email').optional().or(z.literal('')),
+    name: z
+      .string()
+      .min(2, 'Name must be at least 2 characters')
+      .optional()
+      .or(z.literal('')),
+    email: z
+      .string()
+      .email('Please enter a valid email')
+      .optional()
+      .or(z.literal('')),
     comment: z
       .string()
       .min(10, 'Comment must be at least 10 characters')
@@ -22,38 +30,38 @@ export const commentSchema = z
     rating: z.number().min(1).max(5).optional().or(z.literal(0)),
   })
   .refine(
-    (data) => {
+    data => {
       return data.name && data.name.length >= 2;
     },
     {
       message: 'Name must be at least 2 characters',
       path: ['name'],
-    },
+    }
   )
   .refine(
-    (data) => {
+    data => {
       return data.email && z.string().email().safeParse(data.email).success;
     },
     {
       message: 'Please enter a valid email',
       path: ['email'],
-    },
+    }
   )
   .refine(
-    (data) => {
+    data => {
       return data.comment && data.comment.length >= 10;
     },
     {
       message: 'Comment must be at least 10 characters',
       path: ['comment'],
-    },
+    }
   )
   .refine(
-    (data) => {
+    data => {
       return data.rating && data.rating >= 1 && data.rating <= 5;
     },
     {
       message: 'Please select a rating',
       path: ['rating'],
-    },
+    }
   );

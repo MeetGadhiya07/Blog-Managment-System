@@ -1,3 +1,5 @@
+'use client';
+
 import StarRating from '@/components/ui/StarRating';
 import SVGIcon from '@/lib/SVGIcons/Icon';
 import Image from 'next/image';
@@ -10,7 +12,7 @@ interface TourGuide {
   image: string;
 }
 
-const tourGuidesData: TourGuide[] = [
+const TOUR_GUIDES: TourGuide[] = [
   {
     id: '1',
     name: 'Miranda Rachel',
@@ -38,29 +40,31 @@ const TourGuides = () => {
   return (
     <div className="space-y-6">
       <h2 className="text-xl font-semibold text-gray-800">Tour Guides</h2>
-
       <div className="space-y-4">
-        {tourGuidesData.map((guide, index) => (
+        {TOUR_GUIDES.map((guide, index) => (
           <div
             key={guide.id}
-            className={` ${index !== tourGuidesData.length - 1 ? 'border-b border-b-[#DEDEDE] pb-5' : ''}`}
+            className={
+              index !== TOUR_GUIDES.length - 1
+                ? 'border-b border-b-[#DEDEDE] pb-5'
+                : ''
+            }
           >
-            <div className={`mb-3.75 flex items-center space-x-4.5`}>
-              <div className="relative h-15 w-15 shrink-0 overflow-hidden rounded-full">
+            <div className="mb-3.75 flex items-center space-x-4.5">
+              <div className="relative h-15 w-15 shrink-0 overflow-hidden rounded-full bg-gray-200">
                 <Image
                   src={guide.image}
                   alt={guide.name}
                   fill
-                  className="object-cover"
-                  sizes="60px"
+                  className="scale-150 object-cover object-top"
+                  sizes="120px"
+                  priority={index === 0}
                 />
               </div>
-
-              <div className="">
+              <div>
                 <h3 className="mb-2 text-base font-medium tracking-wide text-black">
                   {guide.name}
                 </h3>
-
                 <div className="flex items-center space-x-1">
                   <SVGIcon name="locationIcon" />
                   <span className="line-clamp-1 text-sm tracking-wider text-black opacity-80">
@@ -69,10 +73,11 @@ const TourGuides = () => {
                 </div>
               </div>
             </div>
-
             <div className="flex items-center space-x-2">
               <StarRating rating={guide.rating} readonly size={15} />
-              <span className="text-[15px] text-black">({guide.rating.toFixed(1)})</span>
+              <span className="text-[15px] text-black">
+                ({guide.rating.toFixed(1)})
+              </span>
             </div>
           </div>
         ))}

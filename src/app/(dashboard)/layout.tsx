@@ -5,7 +5,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -39,7 +43,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </button>
         </div>
         <nav className="flex-1 space-y-1 overflow-y-auto p-3 sm:p-4">
-          {navItems.map((item) => {
+          {navItems.map(item => {
             const Icon = item.icon;
             const isActive = pathname === item.href;
             return (
@@ -54,7 +58,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 }`}
               >
                 <Icon size={20} />
-                <span className="text-sm font-medium sm:text-base">{item.label}</span>
+                <span className="text-sm font-medium sm:text-base">
+                  {item.label}
+                </span>
               </Link>
             );
           })}
@@ -81,7 +87,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
         </header>
 
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">{children}</main>
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+          {children}
+        </main>
       </div>
     </div>
   );

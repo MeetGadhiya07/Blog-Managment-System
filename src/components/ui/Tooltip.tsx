@@ -51,14 +51,15 @@ const Tooltip = ({
       baseClasses,
       positionClasses[position],
       isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none',
-      className,
+      className
     );
   };
 
   const getArrowClasses = () => {
     const arrowClasses = {
       top: 'top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-800',
-      bottom: 'bottom-full left-1/2 -translate-x-1/2 border-4 border-transparent border-b-gray-800',
+      bottom:
+        'bottom-full left-1/2 -translate-x-1/2 border-4 border-transparent border-b-gray-800',
       left: 'left-full top-1/2 -translate-y-1/2 border-4 border-transparent border-l-gray-800',
       right:
         'bottom-full left-1/2 -translate-x-1/2 border-4 border-transparent border-b-gray-800 md:right-full md:top-1/2 md:-translate-y-1/2 md:left-auto md:bottom-auto md:border-r-gray-800 md:border-b-transparent',

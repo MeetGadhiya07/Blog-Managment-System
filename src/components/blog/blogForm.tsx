@@ -33,7 +33,7 @@ export function BlogForm({ blog, onSubmit, onCancel }: BlogFormProps) {
           description: '',
           published: false,
           author: '',
-        },
+        }
   );
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export function BlogForm({ blog, onSubmit, onCancel }: BlogFormProps) {
             description: '',
             published: false,
             author: '',
-          },
+          }
     );
   }, [blog]);
 
@@ -72,7 +72,7 @@ export function BlogForm({ blog, onSubmit, onCancel }: BlogFormProps) {
       <Input
         label="Title"
         value={formData.title}
-        onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+        onChange={e => setFormData({ ...formData, title: e.target.value })}
         required
         minLength={3}
         placeholder="Enter blog title"
@@ -81,15 +81,19 @@ export function BlogForm({ blog, onSubmit, onCancel }: BlogFormProps) {
       <Input
         label="Author"
         value={formData.author || ''}
-        onChange={(e) => setFormData({ ...formData, author: e.target.value })}
+        onChange={e => setFormData({ ...formData, author: e.target.value })}
         placeholder="Author name"
       />
 
       <div>
-        <label className="text-foreground mb-2 block text-sm font-medium">Description</label>
+        <label className="text-foreground mb-2 block text-sm font-medium">
+          Description
+        </label>
         <textarea
           value={formData.description}
-          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+          onChange={e =>
+            setFormData({ ...formData, description: e.target.value })
+          }
           required
           minLength={10}
           placeholder="Brief description of your blog"
@@ -102,10 +106,14 @@ export function BlogForm({ blog, onSubmit, onCancel }: BlogFormProps) {
         <input
           type="checkbox"
           checked={formData.published}
-          onChange={(e) => setFormData({ ...formData, published: e.target.checked })}
+          onChange={e =>
+            setFormData({ ...formData, published: e.target.checked })
+          }
           className="text-primary border-border focus:ring-primary h-5 w-5 rounded focus:ring-2"
         />
-        <span className="text-foreground text-sm font-medium">Publish immediately</span>
+        <span className="text-foreground text-sm font-medium">
+          Publish immediately
+        </span>
       </label>
 
       <div className="border-border flex gap-3 border-t pt-4">
@@ -113,7 +121,12 @@ export function BlogForm({ blog, onSubmit, onCancel }: BlogFormProps) {
           {loading ? 'Saving...' : blog ? 'Update Blog' : 'Create Blog'}
         </Button>
         {onCancel && (
-          <Button type="button" variant="primary" onClick={onCancel} disabled={loading}>
+          <Button
+            type="button"
+            variant="primary"
+            onClick={onCancel}
+            disabled={loading}
+          >
             Cancel
           </Button>
         )}

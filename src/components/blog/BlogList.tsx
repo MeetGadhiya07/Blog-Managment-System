@@ -19,7 +19,7 @@ export const BlogList = ({
   showTitle = false,
   className,
 }: BlogListProps) => {
-  if (blogs.length === 0) {
+  if (!blogs.length) {
     return (
       <div className="py-12 text-center text-gray-500">
         <p className="text-lg">No blogs found</p>
@@ -37,7 +37,7 @@ export const BlogList = ({
         )}
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
-          {blogs.map((blog) => (
+          {blogs.map(blog => (
             <BlogCard
               key={blog.id}
               blog={blog}

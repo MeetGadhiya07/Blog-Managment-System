@@ -1,11 +1,11 @@
 import { MetadataRoute } from 'next';
+import { siteConfig } from '@/config/site';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Blog Management System - Complete Blog CMS',
+    name: siteConfig.name,
     short_name: 'Blog CMS',
-    description:
-      'Complete Blog CMS with CRUD operations, rich text editor, and image gallery support',
+    description: siteConfig.description,
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',

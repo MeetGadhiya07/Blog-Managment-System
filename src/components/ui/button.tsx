@@ -13,9 +13,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       'inline-flex items-center cursor-pointer justify-center rounded-[.75rem] font-medium transition-all focus:outline-none disabled:cursor-not-allowed  disabled:opacity-50 disabled:pointer-events-none !leading-6 gap-2.5';
 
     const variants = {
-      primary: 'bg-background border border-foreground hover:opacity-50 focus:ring-gray-500',
-      secondary: 'bg-black border border-black text-white hover:opacity-60 focus:ring-gray-500',
-      success: 'bg-success border border-success text-white hover:opacity-60 focus:ring-gray-500',
+      primary:
+        'bg-background border border-foreground hover:opacity-50 focus:ring-gray-500',
+      secondary:
+        'bg-black border border-black text-white hover:opacity-60 focus:ring-gray-500',
+      success:
+        'bg-success border border-success text-white hover:opacity-60 focus:ring-gray-500',
     };
 
     const sizes = {
@@ -31,7 +34,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       />
     );
-  },
+  }
 );
 
 Button.displayName = 'Button';

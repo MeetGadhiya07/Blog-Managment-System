@@ -45,7 +45,10 @@ export const getByBlogId = async (blogId: string): Promise<Comment[]> => {
   return data[blogId] || [];
 };
 
-export const create = async (blogId: string, input: CreateCommentInput): Promise<Comment> => {
+export const create = async (
+  blogId: string,
+  input: CreateCommentInput
+): Promise<Comment> => {
   const data = await readData();
   const newComment: Comment = {
     ...input,

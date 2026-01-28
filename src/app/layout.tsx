@@ -1,7 +1,7 @@
 import BreadcrumbSchema from '@/components/common/BreadcrumbSchema';
 import { ToastProvider } from '@/components/providers/ToastProvider';
 import { config } from '@/config/env';
-import { siteConfig } from '@/config/metadata';
+import { siteConfig } from '@/config/site';
 import { Provider } from '@/lib/store/Provider';
 import type { Metadata, Viewport } from 'next';
 import { Lato } from 'next/font/google';
@@ -19,33 +19,24 @@ const lato = Lato({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: 'Blog Management System - Complete Blog CMS',
-    template: '%s | Blog CMS',
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  keywords: [
-    'Blog',
-    'CMS',
-    'Next.js',
-    'React',
-    'TypeScript',
-    'Tailwind CSS',
-    'CRUD',
-    'Rich Text Editor',
-  ],
-  authors: [{ name: 'Meet Gadhiya' }],
-  creator: 'Blog Management System',
+  keywords: siteConfig.keywords,
+  authors: [{ name: siteConfig.author }],
+  creator: siteConfig.author,
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: siteConfig.url,
-    title: 'Blog Management System - Complete Blog CMS',
+    title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Blog Management System - Complete Blog CMS',
+    title: siteConfig.name,
     description: siteConfig.description,
   },
   robots: {
@@ -55,11 +46,9 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#EAEAEA',
+  themeColor: '#2563eb',
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 5,
-  userScalable: true,
 };
 
 export default function RootLayout({
@@ -69,22 +58,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={lato.className}>
-      <head>
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-
-        {/* Preconnect to analytics domains for faster loading */}
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://www.google-analytics.com" />
-
-        {/* Preconnect to Google Maps for faster loading */}
-        <link rel="preconnect" href="https://maps.googleapis.com" />
-
-        {/* Additional preconnects for performance */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      </head>
-      <body className={`${lato.className} bg-background antialiased`} suppressHydrationWarning>
-        {/* Google Tag Manager (noscript) - Must be immediately after opening body tag */}
+      <body
+        className={`${lato.className} bg-background antialiased`}
+        suppressHydrationWarning
+      >
         {config.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID && (
           <noscript>
             <iframe
@@ -101,8 +78,6 @@ export default function RootLayout({
           <BreadcrumbSchema />
         </Provider>
 
-        {/* Analytics Scripts - Optimized placement and loading */}
-        {/* Google Analytics - beforeInteractive for early initialization */}
         {config.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && (
           <>
             <Script
@@ -110,27 +85,23 @@ export default function RootLayout({
               strategy="beforeInteractive"
             />
             <Script
-              id="google-analytics-init"
+              id="google-analytics"
               strategy="beforeInteractive"
               dangerouslySetInnerHTML={{
                 __html: `
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
-                  gtag('config', '${config.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', {
-                    page_title: document.title,
-                    page_location: window.location.href,
-                  });
+                  gtag('config', '${config.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}');
                 `,
               }}
             />
           </>
         )}
 
-        {/* Google Tag Manager - beforeInteractive for critical tracking */}
         {config.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID && (
           <Script
-            id="google-tag-manager-init"
+            id="google-tag-manager"
             strategy="beforeInteractive"
             dangerouslySetInnerHTML={{
               __html: `

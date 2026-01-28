@@ -11,7 +11,10 @@ export interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElem
 }
 
 const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
-  ({ label, error, required, type = 'text', className = '', ...props }, ref) => {
+  (
+    { label, error, required, type = 'text', className = '', ...props },
+    ref
+  ) => {
     const [showPassword, setShowPassword] = useState(false);
     const isPassword = type === 'password';
     const inputType = isPassword && showPassword ? 'text' : type;
@@ -36,7 +39,7 @@ const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
               tabIndex={-1}
               aria-label={showPassword ? 'Hide password' : 'Show password'}
               className="text-grey500 hover:text-primary absolute inset-y-0 right-3 flex items-center justify-center p-1 focus:outline-none"
-              onClick={() => setShowPassword((prev) => !prev)}
+              onClick={() => setShowPassword(prev => !prev)}
             >
               {/* <SVGIcon
                 name={showPassword ? "eye" : "eyeOff"}
@@ -46,10 +49,12 @@ const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
             </button>
           )}
         </div>
-        {error && <div className="text-statusError mt-0.5 text-xs">{error}</div>}
+        {error && (
+          <div className="text-statusError mt-0.5 text-xs">{error}</div>
+        )}
       </div>
     );
-  },
+  }
 );
 
 InputField.displayName = 'InputField';

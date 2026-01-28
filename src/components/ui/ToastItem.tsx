@@ -51,7 +51,10 @@ const TOAST_CONFIG = {
   closeAnimationDuration: 300,
 };
 
-const ToastItem: React.FC<ToastItemProps> = ({ toast, position = 'bottom-right' }) => {
+const ToastItem: React.FC<ToastItemProps> = ({
+  toast,
+  position = 'bottom-right',
+}) => {
   const { removeToast } = useToast();
   const [isVisible, setIsVisible] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
@@ -65,7 +68,10 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, position = 'bottom-right' 
 
   useEffect(() => {
     // Show toast with slight delay for animation
-    const showTimer = setTimeout(() => setIsVisible(true), TOAST_CONFIG.animationDelay);
+    const showTimer = setTimeout(
+      () => setIsVisible(true),
+      TOAST_CONFIG.animationDelay
+    );
     // Auto-dismiss after configured delay
     const dismissTimer = setTimeout(() => {
       handleClose();
@@ -77,7 +83,8 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, position = 'bottom-right' 
     };
   }, [handleClose]);
 
-  const variantConfig = TOAST_CONFIG.variants[toast.variant] || TOAST_CONFIG.variants.default;
+  const variantConfig =
+    TOAST_CONFIG.variants[toast.variant] || TOAST_CONFIG.variants.default;
   const positionClasses = TOAST_CONFIG.positions[position];
 
   return (
@@ -86,7 +93,9 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, position = 'bottom-right' 
         TOAST_CONFIG.baseStyles,
         variantConfig.classes,
         positionClasses,
-        isVisible && !isExiting ? TOAST_CONFIG.animation.enter : TOAST_CONFIG.animation.exit,
+        isVisible && !isExiting
+          ? TOAST_CONFIG.animation.enter
+          : TOAST_CONFIG.animation.exit
       )}
     >
       <div className="shrink-0">{variantConfig.icon}</div>

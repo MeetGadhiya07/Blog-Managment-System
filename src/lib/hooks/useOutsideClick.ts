@@ -11,7 +11,7 @@ export const useOutsideClick = <T extends HTMLElement = HTMLElement>(
   ref: RefObject<T | null>,
   handler: () => void,
   excludeRefs: RefObject<HTMLElement | null>[] = [],
-  enabled: boolean = true,
+  enabled: boolean = true
 ): void => {
   useEffect(() => {
     if (!enabled) return;
@@ -24,7 +24,7 @@ export const useOutsideClick = <T extends HTMLElement = HTMLElement>(
 
       // Check if click target is inside any of the excluded elements
       const isInsideExcluded = excludeRefs.some(
-        (excludeRef) => excludeRef.current && excludeRef.current.contains(target),
+        excludeRef => excludeRef.current && excludeRef.current.contains(target)
       );
 
       // Only trigger handler if click is outside both the main ref and all excluded refs

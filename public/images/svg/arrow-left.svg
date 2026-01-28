@@ -7,8 +7,8 @@
     stroke="#10152E" 
     stroke-width="1" 
     fill="none"
-    stroke-linecap="round" 
-    stroke-linejoin="round"
+    strokeLinecap="round" 
+    strokeLinejoin="round"
   />
   
   <!-- Left arrow -->
@@ -16,8 +16,8 @@
     d="M6.857 5.143L4 8l2.857 2.857" 
     stroke="#10152E" 
     stroke-width="1"
-    stroke-linecap="round" 
-    stroke-linejoin="round"
+    strokeLinecap="round" 
+    strokeLinejoin="round"
     fill="none"
   />
   
@@ -26,7 +26,7 @@
     d="M4 8h8" 
     stroke="#10152E" 
     stroke-width="1"
-    stroke-linecap="round" 
-    stroke-linejoin="round"
+    strokeLinecap="round" 
+    strokeLinejoin="round"
   />
 </svg>

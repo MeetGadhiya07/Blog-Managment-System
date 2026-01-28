@@ -22,10 +22,12 @@ const TextareaField = React.forwardRef<HTMLTextAreaElement, TextareaFieldProps>(
             {...props}
           />
         </div>
-        {error && <div className="text-statusError mt-0.5 text-xs">{error}</div>}
+        {error && (
+          <div className="text-statusError mt-0.5 text-xs">{error}</div>
+        )}
       </div>
     );
-  },
+  }
 );
 
 TextareaField.displayName = 'TextareaField';

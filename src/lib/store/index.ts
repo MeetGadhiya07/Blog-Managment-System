@@ -11,7 +11,7 @@ export const store = configureStore({
   reducer: {
     auth: authReducer,
   },
-  middleware: (getDefaultMiddleware) =>
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
         // Ignore these action types
@@ -22,7 +22,9 @@ export const store = configureStore({
 
 // Make store available globally for cross-tab communication
 if (typeof window !== 'undefined') {
-  (window as typeof window & { __REDUX_STORE__: typeof store }).__REDUX_STORE__ = store;
+  (
+    window as typeof window & { __REDUX_STORE__: typeof store }
+  ).__REDUX_STORE__ = store;
 }
 
 // Export types

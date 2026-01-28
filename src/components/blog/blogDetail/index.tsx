@@ -7,7 +7,7 @@ import BlogContent from './BlogContent';
 
 const BlogPage = async ({ blog }: { blog: Blog }) => {
   const blogs = await getBlogs();
-  const publishedBlogs = blogs.filter((blog) => blog.published);
+  const publishedBlogs = blogs.filter(blog => blog.published);
 
   return (
     <>

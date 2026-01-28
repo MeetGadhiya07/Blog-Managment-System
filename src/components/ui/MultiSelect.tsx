@@ -34,7 +34,10 @@ const MultiSelect = ({
   // Handle outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
         setSearchTerm('');
       }
@@ -61,19 +64,23 @@ const MultiSelect = ({
 
   const handleToggleOption = (value: string) => {
     const newValues = selectedValues.includes(value)
-      ? selectedValues.filter((v) => v !== value)
+      ? selectedValues.filter(v => v !== value)
       : [...selectedValues, value];
     onChange(newValues);
   };
 
   const handleSelectAll = () => {
     const filteredOptions = getFilteredOptions();
-    const allFilteredValues = filteredOptions.map((opt) => opt.value);
-    const hasAllSelected = allFilteredValues.every((val) => selectedValues.includes(val));
+    const allFilteredValues = filteredOptions.map(opt => opt.value);
+    const hasAllSelected = allFilteredValues.every(val =>
+      selectedValues.includes(val)
+    );
 
     if (hasAllSelected) {
       // Deselect all filtered options
-      const newValues = selectedValues.filter((val) => !allFilteredValues.includes(val));
+      const newValues = selectedValues.filter(
+        val => !allFilteredValues.includes(val)
+      );
       onChange(newValues);
     } else {
       // Select all filtered options
@@ -89,7 +96,7 @@ const MultiSelect = ({
   const getDisplayText = () => {
     if (selectedValues.length === 0) return placeholder;
     if (selectedValues.length === 1) {
-      const option = options.find((opt) => opt.value === selectedValues[0]);
+      const option = options.find(opt => opt.value === selectedValues[0]);
       return option?.label || '';
     }
     return `${selectedValues.length} selected`;
@@ -97,15 +104,15 @@ const MultiSelect = ({
 
   const getFilteredOptions = () => {
     if (!searchTerm) return options;
-    return options.filter((option) =>
-      option.label.toLowerCase().includes(searchTerm.toLowerCase()),
+    return options.filter(option =>
+      option.label.toLowerCase().includes(searchTerm.toLowerCase())
     );
   };
 
   const filteredOptions = getFilteredOptions();
   const hasAllFilteredSelected =
     filteredOptions.length > 0 &&
-    filteredOptions.every((opt) => selectedValues.includes(opt.value));
+    filteredOptions.every(opt => selectedValues.includes(opt.value));
 
   return (
     <div className="relative" ref={dropdownRef}>
@@ -134,13 +141,18 @@ const MultiSelect = ({
           {selectedValues.length > 0 && !disabled && (
             <button
               type="button"
-              onClick={(e) => {
+              onClick={e => {
                 e.stopPropagation();
                 handleClearAll();
               }}
               className="text-gray-400 hover:text-gray-600"
             >
-              <svg className="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                className="size-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -156,7 +168,12 @@ const MultiSelect = ({
             stroke="currentColor"
             viewBox="0 0 24 24"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 9l-7 7-7-7"
+            />
           </svg>
         </div>
       </div>
@@ -170,7 +187,7 @@ const MultiSelect = ({
               type="text"
               placeholder="Search options..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={e => setSearchTerm(e.target.value)}
               className="focus:border-primary focus:ring-primary w-full rounded border border-gray-300 px-2 py-1 text-sm focus:ring-1 focus:outline-none"
               autoFocus
             />
@@ -193,9 +210,11 @@ const MultiSelect = ({
           {/* Options list */}
           <div className="max-h-60 overflow-y-auto">
             {filteredOptions.length === 0 ? (
-              <div className="px-3 py-2 text-sm text-gray-500">No options found</div>
+              <div className="px-3 py-2 text-sm text-gray-500">
+                No options found
+              </div>
             ) : (
-              filteredOptions.map((option) => (
+              filteredOptions.map(option => (
                 <div
                   key={option.value}
                   className="flex cursor-pointer items-center px-3 py-2 hover:bg-gray-50"

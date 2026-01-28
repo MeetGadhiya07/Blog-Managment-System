@@ -9,10 +9,11 @@ interface BreadcrumbProps {
   items: BreadcrumbItem[];
 }
 
-export const Breadcrumb = ({ items }: BreadcrumbProps) => {
-  return (
-    <nav className="text-dark-blue flex items-center space-x-1 text-sm">
-      {items.map((item, index) => (
+export const Breadcrumb = ({ items }: BreadcrumbProps) => (
+  <nav className="text-dark-blue flex items-center space-x-1 text-sm">
+    {items.map((item, index) => {
+      const isLast = index === items.length - 1;
+      return (
         <div key={index} className="flex items-center tracking-wider uppercase">
           {item.href ? (
             <Link href={item.href} className="font-bold hover:text-gray-900">
@@ -21,9 +22,9 @@ export const Breadcrumb = ({ items }: BreadcrumbProps) => {
           ) : (
             <span className="text-gray-900">{item.label}</span>
           )}
-          {index < items.length - 1 && <span className="ml-1">/</span>}
+          {!isLast && <span className="ml-1">/</span>}
         </div>
-      ))}
-    </nav>
-  );
-};
+      );
+    })}
+  </nav>
+);

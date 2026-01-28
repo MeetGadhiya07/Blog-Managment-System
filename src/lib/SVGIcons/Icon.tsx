@@ -9,7 +9,6 @@ const SVGIcon: React.FC<IconProps> = ({
   className,
   width = 16,
   height = 16,
-  style,
   ...props
 }) => {
   const IconComponent = iconSet[name as keyof typeof iconSet];
@@ -23,11 +22,6 @@ const SVGIcon: React.FC<IconProps> = ({
       className={className}
       width={width}
       height={height}
-      style={{
-        ...style,
-        display: 'inline-block',
-        flexShrink: 0,
-      }}
       {...props}
     />
   );

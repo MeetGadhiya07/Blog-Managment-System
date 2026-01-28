@@ -67,19 +67,30 @@ const StarRating = ({
               readonly ? 'cursor-default' : 'cursor-pointer hover:scale-110'
             }`}
             onClick={() => handleClick(index)}
-            onMouseMove={(e) => handleMouseMove(index, e)}
+            onMouseMove={e => handleMouseMove(index, e)}
           >
             {/* Background star */}
-            <Star size={size} className="text-warning transition-colors duration-200" />
+            <Star
+              size={size}
+              className="text-warning transition-colors duration-200"
+            />
 
             {/* Filled star overlay */}
             <div
               className="absolute inset-0 overflow-hidden transition-all duration-200 ease-out"
               style={{
-                width: fillType === 'half' ? '50%' : fillType === 'full' ? '100%' : '0%',
+                width:
+                  fillType === 'half'
+                    ? '50%'
+                    : fillType === 'full'
+                      ? '100%'
+                      : '0%',
               }}
             >
-              <Star size={size} className="fill-warning text-warning transition-all duration-200" />
+              <Star
+                size={size}
+                className="fill-warning text-warning transition-all duration-200"
+              />
             </div>
 
             {/* Click areas for half stars */}
@@ -87,14 +98,14 @@ const StarRating = ({
               <>
                 <div
                   className="absolute inset-0 w-1/2"
-                  onClick={(e) => {
+                  onClick={e => {
                     e.stopPropagation();
                     handleClick(index, true);
                   }}
                 />
                 <div
                   className="absolute inset-0 left-1/2 w-1/2"
-                  onClick={(e) => {
+                  onClick={e => {
                     e.stopPropagation();
                     handleClick(index, false);
                   }}
